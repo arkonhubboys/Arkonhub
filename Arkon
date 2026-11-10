@@ -1,0 +1,675 @@
+-- protected by rbx.lol
+local _z57_6daa307 = "RBXE\001\000\001\002\000Mdw\209^\010\134\018\186wh}r.\192.\170\209\011\248\255\002\000\000\196\146V\147\251\222\031\204\234\153\209w\219e\208\1687\238\251\175\227q\153\157l\"\005q\246\182\173L`\150\240P\239\224\007tn\147\148\190r\008\008\199\127\205\228\202\219kh\252\"\221hz<\222h\022\159\162\251\012\176\012\180\187\154pf\210\025\0201\163\008D\164\143\192\008\007\238\"\243H\204'O\005\006pH\223\131*w~\193B\136\030\204\208\175\189\156\183s\003\236\173\160\172\014 -\186\022(3\197\027\227\195&\163\0236@\242\155\225\254!\160\013^t\142\201\017W\199Q5\248/o\179\255\169\225t\005\1553\127\195G\255\170`\141\215\186\224\184\218\133-\170\210\021\134\215\151\184\210\016,FKe\166?\208\160&\166;\186\171+2\209_\164\003\186\195\167\186F{\178\2041ZX'\170;N\215l\250N@\155z\246\211hE&.\144Q\171\027\136\225\208\228\224]\232B\170\133 \174\210?-\234{\159\210MT\152\003\168\148\239\170\221i\030\233\216L\027\213\002\224\214N\245\214 ?\247\239\1285\237\236\010\004\227\028\179h%\243\148\238>\169\127z\179\154\202\015\164\1594D0\130\148%\027\024\025L\192*\166fl@b\141\240\202\164=b\175'xf$\146\128\136\183\031\251L=K\006h5i\229\170\167b\176\235.\195\169\153\136\223\208Il\138?$9?\127\243\237>T\255\246|\251a\223\196\015I\172b\004\020\019K\208S\145\155.K\015l\147gPmCR\229\204ko/\201\139\016\206\250\176\155\207cEs\019;\226\018\231\156%\030 J\217\201C\183\003\193\150n\173\139N\005m\021\131\1797\230\152\201\167\197\004h\228r\179\184\012\146\203m\145@4\234\130\214\159\253\175f;\006\2017\240\011\206\2084\2056\230\246\197W\186\202\2556\173'\003\025\138\130\166\156\182\204\149\232\003|%\247\165\031\146\184\136T\208\208\232F\2036R\215\159\024\146\134(\160\202\241\024GQD\233\215\239\165,9^\250\218M\169\21819\181M\255o70\213\185.\248\242E\249\166\231\237\128)\142\145\227E\028\143lK`\002\025z\218=\205Hj\186C\215\190\1717\003\211\178\246\142vN\223\137\221\018'8r\147\234,e\186\1808\1272\239~~\186y9\178\208\013\191\239\143\002\164N=\162.\014\178\139\023j\192\214\245\222 \155\013\197\1366q\219I\024\211\241\183>dO\170\128\197i\181v\153\209\015\197\\2.~\129^\146\001\137\1506\232s~wu\254\006\149\247\143\178\168~t\016+\137\017\1930\187o<xF\1614=\222\179\193KV\198LeK\252\186\249?\"\024=\188\139\179\2311C\136WR\245&\242\000x1G/D!X\027\222~\175\207\235\\\027<\253\232\216\127\025\175\252\135T\239x,^\248\012\210\224Qr\155\158i\141';\151.'H\131\155\196\211\017\139\133\230\030\135"
+local _z51_1a0a4fd = {7,86,213,41,211,68,170,46,89,175,162,172,53,136,163,31,235,138,214,252,5,248,45,143,229,234,36,249,135,100,80,5}
+local _z9_69ec0af, _z21_19784ce, _z35_4602381, _z23_bf17167, _z15_7c34bdd, _z12_430f533, _z56_daeff8a, _z29_462751a, _z53_cd16b98, _z3_110afd8, _z7_bf124ba, _z2_64d791a, _z38_5b00ab5, _z45_75a72fd, _z52_717efa9, MAX_PROTOS, MAX_UPVALS, MAX_CONSTS, MAX_CODE, MAX_BYTES, MAX_POOL, _z27_60a2ed5, _z14_a7a867f, _z13_5b73fac, _z34_4f79f52, _z26_c547bac, _z39_acf4eab, _z18_a945150, _z43_6db35e9, _z41_cf4fd65, __SC, _z54_e44be27, _z46_442f9ef
+local _z20_b57291e = 1
+while true do
+if _z20_b57291e == 13 then
+_z13_5b73fac = function(S)
+local u8, take, u16, uleb, sleb, count, eof, at = _z27_60a2ed5(S, 1)
+if u8() ~= 82 or u8() ~= 66 or u8() ~= 88 or u8() ~= 79 then error() end
+if u16() ~= 2 then error() end
+local fo = { u8(), u8(), u8(), u8() }
+local seen = {}
+for i = 1, 4 do local f = fo[i] if f > 3 or seen[f] then error() end seen[f] = true end
+local disp = u8() if disp > 1 then error() end
+local npool = count(MAX_POOL)
+local pool = {}
+for i = 1, npool do local ps = uleb() local plen = count(MAX_BYTES) local poff = take(plen) pool[i] = { start = ps, off = poff, len = plen } end
+local nprotos = count(MAX_PROTOS)
+local off = {}
+local sc = {}
+local acc = 939193
+for gi = 0, nprotos - 1 do
+off[gi] = at()
+sc[gi] = acc
+uleb() u8()
+local nup = count(MAX_UPVALS)
+for i = 1, nup do local kind = u8() if kind > 1 then error() end uleb() end
+local nk = count(MAX_CONSTS)
+for i = 1, nk do
+local tag = u8()
+if tag == 0 then
+elseif tag == 1 then u8()
+elseif tag == 2 then
+local len = count(MAX_BYTES) local off2 = take(len)
+for j = 0, len - 1 do if _z53_cd16b98(S, off2 + j) >= 128 then error() end end
+elseif tag == 3 then local ss = uleb() local rs = _z56_daeff8a(ss, acc) acc = (acc + rs) % 4294967296 local len = count(MAX_BYTES) take(len)
+elseif tag == 4 then uleb() local len = count(MAX_BYTES) take(len)
+elseif tag == 5 then local idx = uleb() if idx >= npool then error() end
+else error() end
+end
+local ncode = count(MAX_CODE)
+for i = 1, ncode do local _z48_4f80bad = uleb() sleb() sleb() sleb() _z15_7c34bdd = _z56_daeff8a(_z56_daeff8a(_z15_7c34bdd, bit32.lshift(_z15_7c34bdd, 5)), _z48_4f80bad) end
+end
+eof()
+return { S = S, fo = fo, disp = disp, n = nprotos, off = off, pool = pool, sc = sc }
+end
+_z20_b57291e = 35 + ((_z53_cd16b98(_z14_a7a867f,1)~=82) and 4025 or 0)
+elseif _z20_b57291e == 26 then
+_z46_442f9ef = function(pi, U, ...)
+local pr = _z54_e44be27(pi)
+local K, C = pr.K, pr.C
+local B0 = {}
+local top = 0
+local np = pr.np
+for i = 0, np - 1 do B0[i] = select(i + 1, ...) end
+local VA, VAn = {}, 0
+if pr.va then
+VAn = select('#', ...) - np
+if VAn < 0 then VAn = 0 end
+for i = 1, VAn do VA[i] = select(np + i, ...) end
+end
+local pc = 0
+while true do
+local ins = C[pc]
+local op, a, b, c = ins[1], ins[3], ins[4], ins[2]
+if op < 14 then
+if op < 7 then
+if op < 3 then
+if op < 1 then
+if op == 0 then
+B0[a] = _z35_4602381[K[b]]
+end
+else
+if op < 2 then
+if op == 1 then
+B0[a] = K[b]
+end
+else
+if op == 2 then
+local pa = a + (0)
+if b < 0 then
+for i = 1, VAn do B0[pa + i - 1] = VA[i] end
+top = a + VAn
+else
+for i = 0, b - 1 do B0[pa + i] = VA[i + 1] end
+end
+end
+end
+end
+else
+if op < 5 then
+if op < 4 then
+if op == 3 then
+local pa = a + (0)
+local f = B0[pa]
+local nargs = b
+if nargs < 0 then nargs = top - a - 1 end
+local args = {}
+for i = 1, nargs do args[i] = B0[pa + i] end
+local res = _z21_19784ce(f(_z9_69ec0af(args, 1, nargs)))
+if c < 0 then
+for i = 1, res.n do B0[pa + i - 1] = res[i] end
+top = a + res.n
+else
+for i = 0, c - 1 do B0[pa + i] = res[i + 1] end
+end
+end
+else
+if op == 4 then
+B0[a] = B0[b][B0[c]]
+end
+end
+else
+if op < 6 then
+if op == 5 then
+B0[a] = B0[b]
+end
+else
+if op == 6 then
+B0[a] = B0[b] * B0[c]
+end
+end
+end
+end
+else
+if op < 10 then
+if op < 8 then
+if op == 7 then
+local __h1 = _z35_4602381[K[b]] B0[a] = __h1
+end
+else
+if op < 9 then
+if op == 8 then
+local __h1 = K[b] B0[a] = __h1
+end
+else
+if op == 9 then
+local __h1 = B0[b][B0[c]] B0[a] = __h1
+end
+end
+end
+else
+if op < 12 then
+if op < 11 then
+if op == 10 then
+B0[a] = B0[b] + B0[c]
+end
+else
+if op == 11 then
+B0[a] = (B0[b] ~= B0[c])
+end
+end
+else
+if op < 13 then
+if op == 12 then
+if not B0[a] then pc = b continue end
+end
+else
+if op == 13 then
+B0[b] = B0[c] * K[a]
+end
+end
+end
+end
+end
+else
+if op < 21 then
+if op < 17 then
+if op < 15 then
+if op == 14 then
+pc = a
+continue
+end
+else
+if op < 16 then
+if op == 15 then
+local __h2 = _z35_4602381[K[b]] B0[a] = __h2
+end
+else
+if op == 16 then
+local __h2 = K[b] B0[a] = __h2
+end
+end
+end
+else
+if op < 19 then
+if op < 18 then
+if op == 17 then
+local __h2 = B0[b][B0[c]] B0[a] = __h2
+end
+else
+if op == 18 then
+local z = B0[c]
+B0[b] = z * K[a]
+end
+end
+else
+if op < 20 then
+if op == 19 then
+local u = B0[a]
+B0[b] = u
+B0[c] = B0[a] * B0[b]
+end
+else
+if op == 20 then
+B0[a] = B0[b] % B0[c]
+end
+end
+end
+end
+else
+if op < 25 then
+if op < 23 then
+if op < 22 then
+if op == 21 then
+B0[a] = (B0[b] == B0[c])
+end
+else
+if op == 22 then
+local y = K[a]
+B0[b] = B0[c] * y
+end
+end
+else
+if op < 24 then
+if op == 23 then
+B0[b] = B0[a]
+local t = B0[a] * B0[b]
+B0[c] = t
+end
+else
+if op == 24 then
+local d1 = K[a]
+local a0 = B0[c] % d1
+B0[b] = a0
+end
+end
+end
+else
+if op < 27 then
+if op < 26 then
+if op == 25 then
+B0[b] = (B0[c] == K[a])
+end
+else
+if op == 26 then
+local __h1 = B0[b] B0[a] = __h1
+end
+end
+else
+if op < 28 then
+if op == 27 then
+local __h2 = B0[b] B0[a] = __h2
+end
+else
+if op == 28 then
+local pa = a + (0)
+local n = b
+if n < 0 then n = top - a end
+local rets = {}
+for i = 0, n - 1 do rets[i + 1] = B0[pa + i] end
+return _z9_69ec0af(rets, 1, n)
+end
+end
+end
+end
+end
+end
+pc = pc + 1
+end
+end
+_z20_b57291e = 24 + ((_z12_430f533~=4099303896) and 1249 or 0)
+elseif _z20_b57291e == 9 then
+_z12_430f533 = bit32.bxor(bit32.bxor(_z12_430f533, bit32.lshift(_z12_430f533, 5)), math.floor(Vector3.new(4,13,16):Dot(Vector3.new(1,1,1)) + 0.5))
+_z20_b57291e = 29
+elseif _z20_b57291e == 27 then
+_z14_a7a867f = _z52_717efa9()
+_z20_b57291e = 13 + ((_z12_430f533~=4099303896) and 819 or 0)
+elseif _z20_b57291e == 40 then
+_z23_bf17167 = 927544407
+_z20_b57291e = 5
+elseif _z20_b57291e == 19 then
+MAX_CODE = 4194304
+_z20_b57291e = 18
+elseif _z20_b57291e == 23 then
+MAX_PROTOS = 1048576
+_z20_b57291e = 30
+elseif _z20_b57291e == 24 then
+return _z46_442f9ef(0, {}, ...)
+elseif _z20_b57291e == 33 then
+_z12_430f533 = bit32.bxor(bit32.bxor(_z12_430f533, bit32.lshift(_z12_430f533, 5)), math.floor(Vector3.new(2,3,6).Magnitude + 0.5))
+_z20_b57291e = 20
+elseif _z20_b57291e == 18 then
+MAX_BYTES = 67108864
+_z20_b57291e = 16
+elseif _z20_b57291e == 20 then
+_z12_430f533 = bit32.bxor(bit32.bxor(_z12_430f533, bit32.lshift(_z12_430f533, 5)), math.floor(Vector2.new(5,12).Magnitude + 0.5))
+_z20_b57291e = 36
+elseif _z20_b57291e == 29 then
+_z56_daeff8a = bit32.bxor
+_z20_b57291e = 34
+elseif _z20_b57291e == 17 then
+_z27_60a2ed5 = function(S, start)
+local n = #S
+local pos = start
+local function u8()
+if pos > n then error() end
+local v = _z53_cd16b98(S, pos) pos = pos + 1 return v
+end
+local function take(k)
+if pos + k - 1 > n then error() end
+local off = pos pos = pos + k return off
+end
+local function u16() local lo = u8() local hi = u8() return lo + hi * 256 end
+local function uleb()
+local result, shift, cnt = 0, 1, 0
+while true do
+local b = u8() cnt = cnt + 1
+if cnt > 5 then error() end
+result = result + (b % 128) * shift
+if b < 128 then
+if result > 4294967295 then error() end
+return result
+end
+shift = shift * 128
+end
+end
+local function sleb()
+local result, shift, cnt = 0, 1, 0
+while true do
+local b = u8() cnt = cnt + 1
+if cnt > 5 then error() end
+result = result + (b % 128) * shift
+shift = shift * 128
+if b < 128 then
+if b % 128 >= 64 then result = result - shift end
+if result < -2147483648 or result > 2147483647 then error() end
+return result
+end
+end
+end
+local function count(max)
+local c = uleb()
+if c > max then error() end
+if c > n - pos + 1 then error() end
+return c
+end
+local function eof() if pos ~= n + 1 then error() end end
+local function at() return pos end
+return u8, take, u16, uleb, sleb, count, eof, at
+end
+_z20_b57291e = 27
+elseif _z20_b57291e == 8 then
+_z26_c547bac, _z39_acf4eab, _z18_a945150, _z43_6db35e9 = _z34_4f79f52.S, _z34_4f79f52.off, _z34_4f79f52.fo, {}
+_z20_b57291e = 37 + ((_z12_430f533~=4099303896) and 549 or 0)
+elseif _z20_b57291e == 28 then
+_z12_430f533 = bit32.bxor(bit32.bxor(_z12_430f533, bit32.lshift(_z12_430f533, 5)), math.floor((CFrame.new(3,5,7) * CFrame.new(2,4,6)).X + 0.5))
+_z20_b57291e = 31
+elseif _z20_b57291e == 35 then
+_z34_4f79f52 = _z13_5b73fac(_z14_a7a867f)
+_z20_b57291e = 8 + ((_z53_cd16b98(_z14_a7a867f,4)~=79) and 805 or 0)
+elseif _z20_b57291e == 21 then
+_z21_19784ce = table.pack or function(...) return { n = select('#', ...), ... } end
+_z20_b57291e = 12
+elseif _z20_b57291e == 36 then
+_z12_430f533 = bit32.bxor(bit32.bxor(_z12_430f533, bit32.lshift(_z12_430f533, 5)), math.floor(Vector3.new(1,4,8).Magnitude + 0.5))
+_z20_b57291e = 28
+elseif _z20_b57291e == 34 then
+_z29_462751a = string.char
+_z20_b57291e = 22
+elseif _z20_b57291e == 1 then
+_z9_69ec0af = table.unpack or unpack
+_z20_b57291e = 21
+elseif _z20_b57291e == 6 then
+__SC = _z34_4f79f52.sc
+_z20_b57291e = 10 + ((_z53_cd16b98(_z14_a7a867f,2)~=66) and 1786 or 0)
+elseif _z20_b57291e == 30 then
+MAX_UPVALS = 65536
+_z20_b57291e = 14
+elseif _z20_b57291e == 14 then
+MAX_CONSTS = 1048576
+_z20_b57291e = 19
+elseif _z20_b57291e == 11 then
+_z3_110afd8 = string.sub
+_z20_b57291e = 2
+elseif _z20_b57291e == 37 then
+_z41_cf4fd65 = _z34_4f79f52.pool
+_z20_b57291e = 6 + ((_z15_7c34bdd~=963638811) and 1615 or 0)
+elseif _z20_b57291e == 2 then
+_z7_bf124ba = function(S, off, len, start)
+local st = start
+local out = table.create and table.create(len) or {}
+for i = 1, len do
+st = (st * _z56_daeff8a(3442985850, _z56_daeff8a(_z15_7c34bdd, _z12_430f533)) + _z56_daeff8a(3435106598, _z56_daeff8a(_z15_7c34bdd, _z12_430f533))) % 4294967296
+local k = math.floor(st / 16777216) % 256
+out[i] = _z29_462751a(_z56_daeff8a(_z53_cd16b98(S, off + i - 1), k))
+end
+return table.concat(out)
+end
+_z20_b57291e = 39
+elseif _z20_b57291e == 16 then
+MAX_POOL = 1048576
+_z20_b57291e = 17
+elseif _z20_b57291e == 3 then
+_z12_430f533 = 1654138785
+_z20_b57291e = 7
+elseif _z20_b57291e == 38 then
+_z52_717efa9 = function()
+local E = _z57_6daa307
+local n = #E
+if n < 49 then error() end
+if _z53_cd16b98(E,1) ~= 82 or _z53_cd16b98(E,2) ~= 66 or _z53_cd16b98(E,3) ~= 88 or _z53_cd16b98(E,4) ~= 69 then error() end
+if _z53_cd16b98(E,5) ~= 1 or _z53_cd16b98(E,6) ~= 0 then error() end
+if _z53_cd16b98(E,7) ~= 1 then error() end
+local ct_len = _z53_cd16b98(E,30) + _z53_cd16b98(E,31)*256 + _z53_cd16b98(E,32)*65536 + _z53_cd16b98(E,33)*16777216
+if 49 + ct_len ~= n then error() end
+local aad = {}
+for i = 1, 17 do aad[i] = _z53_cd16b98(E, i) end
+aad[18] = _z53_cd16b98(E,30) aad[19] = _z53_cd16b98(E,31) aad[20] = _z53_cd16b98(E,32) aad[21] = _z53_cd16b98(E,33)
+local nonce = {}
+for i = 1, 12 do nonce[i] = _z53_cd16b98(E, 17 + i) end
+local ct = {}
+for i = 1, ct_len do ct[i] = _z53_cd16b98(E, 33 + i) end
+local tag = {}
+for i = 1, 16 do tag[i] = _z53_cd16b98(E, 33 + ct_len + i) end
+local pt = _z38_5b00ab5(_z51_1a0a4fd, nonce, aad, 21, ct, ct_len, tag)
+if pt == nil then error() end
+return _z45_75a72fd(pt, ct_len)
+end
+_z20_b57291e = 23
+elseif _z20_b57291e == 10 then
+_z54_e44be27 = function(gi)
+local m = _z43_6db35e9[gi]
+if m then return m end
+local u8, take, u16, uleb, sleb, count, eof, at = _z27_60a2ed5(_z26_c547bac, _z39_acf4eab[gi])
+local np = uleb()
+local va = u8() ~= 0
+local nup = count(MAX_UPVALS)
+local UP = {}
+for i = 1, nup do local kind = u8() UP[i] = { kind, uleb() } end
+local nk = count(MAX_CONSTS)
+local K = {}
+local acc = __SC[gi]
+for i = 0, nk - 1 do
+local tag = u8()
+if tag == 1 then K[i] = u8() ~= 0
+elseif tag == 2 then local len = count(MAX_BYTES) local off = take(len) K[i] = _z2_64d791a(_z3_110afd8(_z26_c547bac, off, off + len - 1))
+elseif tag == 3 then local ss = uleb() local rs = _z56_daeff8a(ss, acc) acc = (acc + rs) % 4294967296 local len = count(MAX_BYTES) local off = take(len) K[i] = _z7_bf124ba(_z26_c547bac, off, len, rs)
+elseif tag == 4 then local start = uleb() local len = count(MAX_BYTES) local off = take(len) K[i] = _z2_64d791a(_z7_bf124ba(_z26_c547bac, off, len, start))
+elseif tag == 5 then local idx = uleb() local pe = _z41_cf4fd65[idx + 1] K[i] = _z7_bf124ba(_z26_c547bac, pe.off, pe.len, pe.start) end
+end
+local ncode = count(MAX_CODE)
+local C = {}
+local fo = _z18_a945150
+for i = 0, ncode - 1 do
+local op = uleb() local a = sleb() local b = sleb() local c = sleb()
+local vals = { op, a, b, c }
+C[i] = { vals[fo[1] + 1], vals[fo[2] + 1], vals[fo[3] + 1], vals[fo[4] + 1] }
+end
+m = { np = np, va = va, K = K, C = C, UP = UP }
+_z43_6db35e9[gi] = m
+return m
+end
+_z20_b57291e = 26 + ((_z15_7c34bdd~=963638811) and 3554 or 0)
+elseif _z20_b57291e == 15 then
+_z45_75a72fd = function(t, n)
+local parts, pi, i = {}, 0, 1
+while i <= n do
+local j = i + 999 if j > n then j = n end
+pi = pi + 1 parts[pi] = _z29_462751a(_z9_69ec0af(t, i, j)) i = j + 1
+end
+return table.concat(parts)
+end
+_z20_b57291e = 38
+elseif _z20_b57291e == 7 then
+_z12_430f533 = bit32.bxor(bit32.bxor(_z12_430f533, bit32.lshift(_z12_430f533, 5)), math.floor(Vector3.new(1,2,2):Cross(Vector3.new(2,-2,1)):Dot(Vector3.new(1,1,1)) + 0.5))
+_z20_b57291e = 33
+elseif _z20_b57291e == 5 then
+for __i = 1, 11 do
+_z23_bf17167 = bit32.bxor(_z23_bf17167, bit32.lshift(_z23_bf17167, 13))
+_z23_bf17167 = bit32.bxor(_z23_bf17167, bit32.rshift(_z23_bf17167, 17))
+_z23_bf17167 = bit32.bxor(_z23_bf17167, bit32.lshift(_z23_bf17167, 5))
+end
+_z20_b57291e = 25
+elseif _z20_b57291e == 12 then
+_z35_4602381 = _G
+_z20_b57291e = 32
+elseif _z20_b57291e == 39 then
+_z2_64d791a = function(t)
+t = string.gsub(t, '_', '')
+local p = string.lower(string.sub(t, 1, 2))
+if p == '0b' then return tonumber(string.sub(t, 3), 2) end
+return tonumber(t)
+end
+_z20_b57291e = 4
+elseif _z20_b57291e == 31 then
+_z12_430f533 = bit32.bxor(bit32.bxor(_z12_430f533, bit32.lshift(_z12_430f533, 5)), math.floor(Vector2.new(20,21).Magnitude + 0.5))
+_z20_b57291e = 9
+elseif _z20_b57291e == 25 then
+_z15_7c34bdd = _z23_bf17167
+_z20_b57291e = 3
+elseif _z20_b57291e == 22 then
+_z53_cd16b98 = string.byte
+_z20_b57291e = 11
+elseif _z20_b57291e == 4 then
+do
+
+local bxor, lrot, band, bor = bit32.bxor, bit32.lrotate, bit32.band, bit32.bor
+local floor = math.floor
+local function u32(x) return x % 4294967296 end
+local function qr(s, a, b, c, d)
+s[a] = u32(s[a] + s[b]); s[d] = lrot(bxor(s[d], s[a]), 16)
+s[c] = u32(s[c] + s[d]); s[b] = lrot(bxor(s[b], s[c]), 12)
+s[a] = u32(s[a] + s[b]); s[d] = lrot(bxor(s[d], s[a]), 8)
+s[c] = u32(s[c] + s[d]); s[b] = lrot(bxor(s[b], s[c]), 7)
+end
+local function _z50_1664b69(b, off)
+return b[off] + b[off + 1] * 256 + b[off + 2] * 65536 + b[off + 3] * 16777216
+end
+local function _z8_45b72c5(key, counter, nonce)
+local s = {
+bit32.bxor(0xfd394c70, 0x9c493415), bit32.bxor(0xdb49d93c, 0xe869bd52), bit32.bxor(0x9efa0d7e, 0xe798204c), bit32.bxor(0x250f3529, 0x4e2f505d),
+_z50_1664b69(key, 1), _z50_1664b69(key, 5), _z50_1664b69(key, 9), _z50_1664b69(key, 13),
+_z50_1664b69(key, 17), _z50_1664b69(key, 21), _z50_1664b69(key, 25), _z50_1664b69(key, 29),
+counter, _z50_1664b69(nonce, 1), _z50_1664b69(nonce, 5), _z50_1664b69(nonce, 9),
+}
+local w = {}
+for i = 1, 16 do w[i] = s[i] end
+for _ = 1, 10 do
+qr(w,1,5,9,13); qr(w,2,6,10,14); qr(w,3,7,11,15); qr(w,4,8,12,16)
+qr(w,1,6,11,16); qr(w,2,7,12,13); qr(w,3,8,9,14); qr(w,4,5,10,15)
+end
+local out = {}
+for i = 1, 16 do
+local v = u32(w[i] + s[i])
+local b = (i - 1) * 4
+out[b+1] = v % 256; out[b+2] = floor(v/256) % 256
+out[b+3] = floor(v/65536) % 256; out[b+4] = floor(v/16777216) % 256
+end
+return out
+end
+local function _z11_4a38b32(key, counter0, nonce, data, dlen)
+local out, block = {}, nil
+for i = 0, dlen - 1 do
+local bi = i % 64
+if bi == 0 then block = _z8_45b72c5(key, counter0 + floor(i/64), nonce) end
+out[i+1] = bxor(data[i+1], block[bi+1])
+end
+return out
+end
+local function _z30_3161760(bytes, off, nbytes, append)
+local L = {0,0,0,0,0,0,0,0,0,0}
+local acc, accbits, li = 0, 0, 1
+for i = 0, nbytes - 1 do
+acc = acc + bytes[off+i] * (2 ^ accbits); accbits = accbits + 8
+while accbits >= 13 do L[li] = acc % 8192; acc = floor(acc/8192); accbits = accbits - 13; li = li + 1 end
+end
+if append then
+acc = acc + (2 ^ accbits); accbits = accbits + 1
+while accbits >= 13 and li <= 10 do L[li] = acc % 8192; acc = floor(acc/8192); accbits = accbits - 13; li = li + 1 end
+end
+if li <= 10 then L[li] = L[li] + acc end
+return L
+end
+local function _z16_5de1b54(a)
+local out = {}
+local acc, accbits, k = 0, 0, 1
+for i = 1, 10 do
+acc = acc + a[i] * (2 ^ accbits); accbits = accbits + 13
+while accbits >= 8 and k <= 16 do out[k] = acc % 256; acc = floor(acc/256); accbits = accbits - 8; k = k + 1 end
+end
+while k <= 16 do out[k] = acc % 256; acc = floor(acc/256); k = k + 1 end
+return out
+end
+local function _z47_c4ebd06(a, n)
+local r, c = {}, 0
+for k = 1, 10 do local v = a[k] + n[k] + c; r[k] = v % 8192; c = floor(v/8192) end
+while c > 0 do
+local v = r[1] + 5 * c; r[1] = v % 8192; c = floor(v/8192)
+local k = 2
+while c > 0 and k <= 10 do v = r[k] + c; r[k] = v % 8192; c = floor(v/8192); k = k + 1 end
+end
+return r
+end
+local function _z25_0427102(a, b)
+local d = {}
+for k = 1, 19 do d[k] = 0 end
+for i = 1, 10 do
+local ai = a[i]
+if ai ~= 0 then for j = 1, 10 do d[i+j-1] = d[i+j-1] + ai * b[j] end end
+end
+for k = 19, 11, -1 do d[k-10] = d[k-10] + 5 * d[k]; d[k] = 0 end
+local c = 0
+for k = 1, 10 do local v = d[k] + c; d[k] = v % 8192; c = floor(v/8192) end
+while c > 0 do
+local v = d[1] + 5 * c; d[1] = v % 8192; c = floor(v/8192)
+local k = 2
+while c > 0 and k <= 10 do v = d[k] + c; d[k] = v % 8192; c = floor(v/8192); k = k + 1 end
+end
+local r = {}
+for k = 1, 10 do r[k] = d[k] end
+return r
+end
+local _z6_ab39028 = {8187,8191,8191,8191,8191,8191,8191,8191,8191,8191}
+local function _z36_8d18995(a)
+local diff, borrow = {}, 0
+for k = 1, 10 do
+local v = a[k] - _z6_ab39028[k] - borrow
+if v < 0 then v = v + 8192; borrow = 1 else borrow = 0 end
+diff[k] = v
+end
+if borrow == 0 then return diff else return a end
+end
+local function _z17_a1f4f9a(rkey, data, dlen)
+local r = {}
+for i = 1, 16 do r[i] = rkey[i] end
+r[4] = band(r[4],15); r[8] = band(r[8],15); r[12] = band(r[12],15); r[16] = band(r[16],15)
+r[5] = band(r[5],252); r[9] = band(r[9],252); r[13] = band(r[13],252)
+local rl = _z30_3161760(r, 1, 16, false)
+local s = {}
+for i = 1, 16 do s[i] = rkey[16+i] end
+local a = {0,0,0,0,0,0,0,0,0,0}
+local i = 0
+while i < dlen do
+local blen = math.min(16, dlen - i)
+a = _z47_c4ebd06(a, _z30_3161760(data, i+1, blen, true))
+a = _z25_0427102(rl, a)
+i = i + blen
+end
+a = _z36_8d18995(a)
+local ab = _z16_5de1b54(a)
+local tag, c = {}, 0
+for k = 1, 16 do local v = ab[k] + s[k] + c; tag[k] = v % 256; c = floor(v/256) end
+return tag
+end
+local function _z22_266c3c5(key, nonce)
+local block = _z8_45b72c5(key, 0, nonce)
+local _z33_c38c90f = {}
+for i = 1, 32 do _z33_c38c90f[i] = block[i] end
+return _z33_c38c90f
+end
+local function _z0_09382e6(aad, alen, ct, clen)
+local mac, mi = {}, 0
+for i = 1, alen do mi = mi + 1; mac[mi] = aad[i] end
+local pa = alen % 16
+if pa ~= 0 then for _ = 1, 16 - pa do mi = mi + 1; mac[mi] = 0 end end
+for i = 1, clen do mi = mi + 1; mac[mi] = ct[i] end
+local pc = clen % 16
+if pc ~= 0 then for _ = 1, 16 - pc do mi = mi + 1; mac[mi] = 0 end end
+local function le64(len)
+local x = len
+for _ = 1, 4 do mi = mi + 1; mac[mi] = x % 256; x = floor(x/256) end
+for _ = 1, 4 do mi = mi + 1; mac[mi] = 0 end
+end
+le64(alen); le64(clen)
+return mac, mi
+end
+
+function _z38_5b00ab5(key, nonce, aad, alen, ct, clen, tag)
+local _z33_c38c90f = _z22_266c3c5(key, nonce)
+local mac, maclen = _z0_09382e6(aad, alen, ct, clen)
+local expected = _z17_a1f4f9a(_z33_c38c90f, mac, maclen)
+local diff = 0
+for i = 1, 16 do diff = bor(diff, bxor(expected[i], tag[i])) end
+if diff ~= 0 then return nil end
+return _z11_4a38b32(key, 1, nonce, ct, clen)
+end
+end
+_z20_b57291e = 15
+elseif _z20_b57291e == 32 then
+do local ok, env = pcall(function() return getfenv(0) end) if ok and type(env) == 'table' then _z35_4602381 = env end end
+_z20_b57291e = 40
+end
+end
